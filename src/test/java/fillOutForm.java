@@ -23,6 +23,9 @@ public class fillOutForm {
         driver.manage().window().maximize();
         driver.navigate().to("https://courses.ultimateqa.com/users/sign_in/");
     }
+
+/*    Se hace el test para el logeo con datos correctos de inicio de sesion.
+      El resultado debe ser el correcto inicio de sesion, indicado por el nombre de usuario "Automation D "*/
     @Test
     public void SignIn1Positive(){
         WebElement emailTextBox = driver.findElement(By.id("user_email"));
@@ -39,9 +42,11 @@ public class fillOutForm {
                 By.xpath("//*[@id=\"my_account\"]/span"));
         String actualMessage = confirmationMessage2.getAttribute("innerText");
         Assert.assertEquals("Automation D ",actualMessage,
-                "The confirmation message is incorrect");
+                "The User and Password is correct");
     }
 
+/*    Se hace el test para el logeo con datos incorrectos de inicio de sesion
+      El resultado debe ser un aviso "invalid mail or password"*/
     @Test
     public void SignIn2Negative(){
         WebElement emailTextBox = driver.findElement(By.id("user_email"));
@@ -58,7 +63,7 @@ public class fillOutForm {
                 By.xpath("//*[@id=\"notifications-error\"]/ul/li"));
         String actualMessage = confirmationMessage2.getAttribute("innerText");
         Assert.assertEquals("Invalid email or password.",actualMessage,
-                "The confirmation message is incorrect");
+                "The User or Password is incorrect");
     }
     @AfterMethod
     public void closeBrowser(){
